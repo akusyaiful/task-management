@@ -16,10 +16,10 @@ export type DBTask = {
 export async function createTask(
   user_id: number,
   title: string,
-  description: string,
+  created_by: string,
+  description?: string,
   status: "To Do" | "In Progress" | "Done" = "To Do",
-  deadline: string,
-  created_by: string
+  deadline?: string
 ): Promise<number | null> {
   try {
     const [result] = await pool.query<ResultSetHeader>(

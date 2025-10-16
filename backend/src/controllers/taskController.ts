@@ -78,10 +78,10 @@ export async function createTask(req: AuthRequest, res: Response) {
     const taskId = await taskModel.createTask(
       user.user_id,
       title,
+      created_by,
       description || "",
       status || "To Do",
-      deadline,
-      created_by
+      deadline
     );
 
     return res.status(201).json({
