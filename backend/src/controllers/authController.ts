@@ -5,7 +5,7 @@ import { createUser, findUserByUsername } from "../models/userModel";
 import { comparePassword, hashPassword } from "../utils/hash";
 dotenv.config();
 
-const SECRET = process.env.JWT_SECRET || "insecure_dev_secret";
+const SECRET = process.env.JWT_SECRET || "secret";
 const EXPIRES_IN = process.env.JWT_EXPIRES_IN || "1h";
 
 export async function register(req: Request, res: Response): Promise<Response> {
@@ -75,7 +75,7 @@ export async function login(req: Request, res: Response): Promise<Response> {
       SECRET,
       { expiresIn: EXPIRES_IN }
     );
-    return res.json({
+    return res.status(200).json({
       success: true,
       message: "Login successful",
       token,
