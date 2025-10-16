@@ -1,5 +1,5 @@
 import React from "react";
 
-export default function Tasks() {
+export default function TaskPage() {
   return <div>Tasks</div>;
 }
