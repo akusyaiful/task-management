@@ -13,3 +13,17 @@
 button {
   cursor: pointer;
 }
+
+.react-datepicker__day--selected {
+  background-color: #155dfc;
+  color: white;
+  border-radius: 9999px;
+}
+.react-datepicker__day:hover {
+  background-color: #bfdbfe;
+}
+
+.react-datepicker {
+  border: 1px solid black !important;
+  border-radius: 16px !important;
+}

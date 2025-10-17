@@ -1,5 +1,7 @@
+import type { TaskStatus } from "../../types/task";
+
 interface ChipProps {
-  status: "To Do" | "In Progress" | "Done";
+  status: TaskStatus;
 }
 
 const chipColor: Record<string, string> = {
@@ -11,7 +13,7 @@ const chipColor: Record<string, string> = {
 export default function ChipStatus({ status }: ChipProps) {
   return (
     <div
-      className={`px-2 py-1 rounded text-sm font-semibold ${chipColor[status]}`}
+      className={`px-2 py-1 rounded-lg text-sm font-semibold ${chipColor[status]}`}
     >
       {status}
     </div>
