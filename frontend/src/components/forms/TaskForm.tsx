@@ -72,7 +72,15 @@ export default function TaskForm({ task, onSubmit, loading }: TaskFormProps) {
         dateFormat="dd-MM-yyyy"
         minDate={new Date()}
       />
-      <button className="bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700 font-semibold">
+      <button
+        type="submit"
+        disabled={!title || loading}
+        className={`py-2 rounded-lg font-semibold text-white ${
+          !title.trim() || loading
+            ? "bg-gray-400 cursor-not-allowed"
+            : "bg-blue-600 hover:bg-blue-700"
+        }`}
+      >
         {loading ? "Loading..." : task ? "Update Task" : "Create Task"}
       </button>
     </form>

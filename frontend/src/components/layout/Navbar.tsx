@@ -13,7 +13,7 @@ export default function Navbar() {
     <div className="flex justify-between items-center p-4 shadow">
       <h1 className="text-2xl font-bold">Task Management</h1>
       <div className="flex gap-4 items-center">
-        <div className="text-xl font-bold">{user}</div>
+        <div className="text-xl hidden sm:block font-bold">{user}</div>
         <button
           className="bg-red-500 font-semibold text-white px-3 py-2 rounded-lg hover:bg-red-500"
           onClick={logout}
