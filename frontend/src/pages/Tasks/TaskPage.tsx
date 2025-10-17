@@ -8,6 +8,7 @@ import TaskList from "../../components/tasks/TaskList";
 import Modal from "../../components/ui/Modal";
 import useTasks from "../../hooks/useTasks";
 import { type Task, type TaskStatus } from "../../types/task";
+import Navbar from "../../components/layout/Navbar";
 
 export default function TaskPage() {
   const {
@@ -44,42 +45,45 @@ export default function TaskPage() {
   };
 
   return (
-    <div className="p-4">
-      <Toaster position="top-center" reverseOrder={false} />
-      <div className="flex justify-between items-center mb-4">
-        <h1 className="text-4xl font-bold">Tasks</h1>
-        <button
-          className="flex items-center gap-2 bg-blue-600 text-white px-3 py-2 rounded-lg hover:bg-blue-700 font-semibold"
-          onClick={() => openModal()}
-        >
-          <Plus size={18} />
-          Add Task
-        </button>
-      </div>
-
-      <TaskFilterSort
-        status={statusFilter}
-        sort={sortOrder}
-        onChangeStatus={setStatusFilter}
-        onChangeSort={setSortOrder}
-      />
-
-      {loading && (
-        <div className="flex justify-center items-center h-64">
-          <ClipLoader color="#155dfc" size={50} />
+    <>
+      <Navbar />
+      <div className="p-4">
+        <Toaster position="top-center" reverseOrder={false} />
+        <div className="flex justify-between items-center mb-4">
+          <h1 className="text-xl font-bold">Tasks</h1>
+          <button
+            className="flex items-center gap-2 bg-blue-600 text-white px-3 py-2 rounded-lg hover:bg-blue-700 font-semibold"
+            onClick={() => openModal()}
+          >
+            <Plus size={18} />
+            Add Task
+          </button>
         </div>
-      )}
 
-      {!loading && !error && (
-        <TaskList tasks={tasks} onEdit={openModal} onDelete={deleteTask} />
-      )}
+        <TaskFilterSort
+          status={statusFilter}
+          sort={sortOrder}
+          onChangeStatus={setStatusFilter}
+          onChangeSort={setSortOrder}
+        />
 
-      <Modal isOpen={modalOpen} onClose={() => setModalOpen(false)}>
-        <h1 className="text-xl font-bold mb-2">
-          {selectedTask ? "Edit Task" : "Add Task"}
-        </h1>
-        <TaskForm task={selectedTask || undefined} onSubmit={handleSubmit} />
-      </Modal>
-    </div>
+        {loading && (
+          <div className="flex justify-center items-center h-64">
+            <ClipLoader color="#155dfc" size={50} />
+          </div>
+        )}
+
+        {!loading && !error && (
+          <TaskList tasks={tasks} onEdit={openModal} onDelete={deleteTask} />
+        )}
+
+        <Modal isOpen={modalOpen} onClose={() => setModalOpen(false)}>
+          <h1 className="text-xl font-bold mb-2">
+            {selectedTask ? "Edit Task" : "Add Task"}
+          </h1>
+          <TaskForm task={selectedTask || undefined} onSubmit={handleSubmit} />
+        </Modal>
+      </div>
+    </>
   );
 }

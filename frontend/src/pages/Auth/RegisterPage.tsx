@@ -24,7 +24,10 @@ export default function RegisterPage() {
 
   return (
     <div className="flex items-center justify-center h-screen">
-      <form className="flex flex-col w-[40%]" onSubmit={handleSubmit}>
+      <form
+        className="flex flex-col w-[70%] sm:w-[40%]"
+        onSubmit={handleSubmit}
+      >
         <h1 className="text-4xl font-bold mb-4">Register</h1>
         <Input
           type="text"

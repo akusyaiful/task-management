@@ -1,5 +1,6 @@
 import { AxiosError } from "axios";
-import { useEffect, useState } from "react";
+import { useState } from "react";
+import toast from "react-hot-toast";
 import {
   createTaskService,
   deleteTaskService,
@@ -7,7 +8,6 @@ import {
   updateTaskService,
 } from "../service/taskService";
 import type { Task, TaskStatus } from "../types/task";
-import toast from "react-hot-toast";
 
 export default function useTasks() {
   const [tasks, setTasks] = useState<Task[]>([]);
@@ -133,10 +133,6 @@ export default function useTasks() {
       setLoading(false);
     }
   };
-
-  useEffect(() => {
-    getTasks();
-  }, []);
 
   return {
     tasks,
