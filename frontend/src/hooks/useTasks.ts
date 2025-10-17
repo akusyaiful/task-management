@@ -7,6 +7,7 @@ import {
   updateTaskService,
 } from "../service/taskService";
 import type { Task, TaskStatus } from "../types/task";
+import toast from "react-hot-toast";
 
 export default function useTasks() {
   const [tasks, setTasks] = useState<Task[]>([]);
@@ -25,7 +26,11 @@ export default function useTasks() {
         status === "All" ? undefined : status,
         sort
       );
-      setTasks(res);
+      if (res.success) {
+        setTasks(res.tasks);
+      } else {
+        toast.error(res.message);
+      }
     } catch (error: unknown) {
       let message = "Server Error";
 
@@ -35,6 +40,7 @@ export default function useTasks() {
         message = error.message;
       }
 
+      toast.error(message);
       setError(message);
       return null;
     } finally {
@@ -47,8 +53,13 @@ export default function useTasks() {
     setError(null);
 
     try {
-      await createTaskService(task);
-      await getTasks();
+      const res = await createTaskService(task);
+      if (res.success) {
+        toast.success(res.message);
+        await getTasks();
+      } else {
+        toast.error(res.message);
+      }
     } catch (error: unknown) {
       let message = "Server Error";
 
@@ -57,7 +68,7 @@ export default function useTasks() {
       } else if (error instanceof Error) {
         message = error.message;
       }
-
+      toast.error(message);
       setError(message);
       return null;
     } finally {
@@ -70,8 +81,13 @@ export default function useTasks() {
     setError(null);
 
     try {
-      await updateTaskService(id, task);
-      await getTasks();
+      const res = await updateTaskService(id, task);
+      if (res.success) {
+        toast.success(res.message);
+        await getTasks();
+      } else {
+        toast.error(res.message);
+      }
     } catch (error: unknown) {
       let message = "Server Error";
 
@@ -81,6 +97,7 @@ export default function useTasks() {
         message = error.message;
       }
 
+      toast.error(message);
       setError(message);
       return null;
     } finally {
@@ -93,8 +110,13 @@ export default function useTasks() {
     setError(null);
 
     try {
-      await deleteTaskService(id);
-      await getTasks();
+      const res = await deleteTaskService(id);
+      if (res.success) {
+        toast.success(res.message);
+        await getTasks();
+      } else {
+        toast.error(res.message);
+      }
     } catch (error: unknown) {
       let message = "Server Error";
 
@@ -104,6 +126,7 @@ export default function useTasks() {
         message = error.message;
       }
 
+      toast.error(message);
       setError(message);
       return null;
     } finally {

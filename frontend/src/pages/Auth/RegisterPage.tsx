@@ -11,7 +11,7 @@ export default function RegisterPage() {
   const [confirmPassword, setConfirmPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
 
-  const { register, loading, error } = useRegister();
+  const { register, loading } = useRegister();
   const navigate = useNavigate();
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -60,8 +60,6 @@ export default function RegisterPage() {
             onClick={() => setShowPassword(!showPassword)}
           />
         </Input>
-
-        {error && <p className="text-red-500 mb-2">{error}</p>}
 
         <button
           type="submit"

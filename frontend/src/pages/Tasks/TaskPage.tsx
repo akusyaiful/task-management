@@ -6,6 +6,7 @@ import { Plus } from "lucide-react";
 import Modal from "../../components/ui/Modal";
 import TaskForm from "../../components/forms/TaskForm";
 import TaskFilterSort from "../../components/tasks/TaskFilterSort";
+import { Toaster } from "react-hot-toast";
 
 export default function TaskPage() {
   const {
@@ -43,6 +44,7 @@ export default function TaskPage() {
 
   return (
     <div className="p-4">
+      <Toaster position="top-center" reverseOrder={false} />
       <div className="flex justify-between items-center mb-4">
         <h1 className="text-4xl font-bold">Tasks</h1>
         <button

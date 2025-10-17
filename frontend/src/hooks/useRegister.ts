@@ -1,6 +1,7 @@
 import { AxiosError } from "axios";
 import { useState } from "react";
 import { registerService } from "../service/authService";
+import toast from "react-hot-toast";
 
 interface RegisterData {
   name: string;
@@ -10,20 +11,19 @@ interface RegisterData {
 
 export default function useRegister() {
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState<string | null>(null);
 
   const register = async (data: RegisterData) => {
     setLoading(true);
-    setError(null);
 
     try {
       const res = await registerService(data);
       if (res.success) {
         localStorage.setItem("token", res.token);
         localStorage.setItem("user", JSON.stringify(res.user));
+        toast.success(res.message);
         return res.user;
       } else {
-        setError(res.message);
+        toast.error(res.message);
         return null;
       }
     } catch (error: unknown) {
@@ -34,13 +34,12 @@ export default function useRegister() {
       } else if (error instanceof Error) {
         message = error.message;
       }
-
-      setError(message);
+      toast.error(message);
       return null;
     } finally {
       setLoading(false);
     }
   };
 
-  return { register, loading, error };
+  return { register, loading };
 }

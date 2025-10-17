@@ -9,7 +9,7 @@ export default function LoginPage() {
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
 
-  const { login, loading, error } = useLogin();
+  const { login, loading } = useLogin();
   const navigate = useNavigate();
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -42,8 +42,6 @@ export default function LoginPage() {
             onClick={() => setShowPassword(!showPassword)}
           />
         </Input>
-
-        {error && <p className="text-red-500 mb-2">{error}</p>}
 
         <button
           type="submit"

@@ -2,9 +2,7 @@ import type { Task, TaskStatus } from "../types/task";
 import api from "./api";
 
 export const getTasksService = (status?: TaskStatus, sort?: "asc" | "desc") =>
-  api
-    .get("/tasks", { params: { status, sort } })
-    .then((res) => res.data.tasks as Task[]);
+  api.get("/tasks", { params: { status, sort } }).then((res) => res.data);
 
 export const createTaskService = (task: Partial<Task>) =>
   api.post("/tasks", task).then((res) => res.data);

@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { loginService } from "../service/authService";
 import { AxiosError } from "axios";
+import toast from "react-hot-toast";
 
 interface LoginData {
   username: string;
@@ -9,20 +10,19 @@ interface LoginData {
 
 export default function useLogin() {
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState<string | null>(null);
 
   const login = async (data: LoginData) => {
     setLoading(true);
-    setError(null);
 
     try {
       const res = await loginService(data);
       if (res.success) {
         localStorage.setItem("token", res.token);
         localStorage.setItem("user", JSON.stringify(res.user));
+        toast.success(res.message);
         return res.user;
       } else {
-        setError(res.message);
+        toast.error(res.message);
         return null;
       }
     } catch (error: unknown) {
@@ -33,13 +33,12 @@ export default function useLogin() {
       } else if (error instanceof Error) {
         message = error.message;
       }
-
-      setError(message);
+      toast.error(message);
       return null;
     } finally {
       setLoading(false);
     }
   };
 
-  return { login, loading, error };
+  return { login, loading };
 }
