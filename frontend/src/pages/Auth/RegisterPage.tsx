@@ -3,6 +3,7 @@ import { Link, useNavigate } from "react-router";
 import TogglePassword from "../../components/ui/TogglePassword";
 import Input from "../../components/ui/Input";
 import useRegister from "../../hooks/useRegister";
+import { Toaster } from "react-hot-toast";
 
 export default function RegisterPage() {
   const [name, setName] = useState("");
@@ -24,6 +25,8 @@ export default function RegisterPage() {
 
   return (
     <div className="flex items-center justify-center h-screen">
+      <Toaster position="top-center" reverseOrder={false} />
+
       <form
         className="flex flex-col w-[70%] sm:w-[40%]"
         onSubmit={handleSubmit}

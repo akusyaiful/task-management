@@ -20,6 +20,10 @@ api.interceptors.response.use(
     if (error.response?.status === 401) {
       toast.error("Invalid token");
     }
+    if (error.response && error.response.data) {
+      return Promise.reject(error.response.data);
+    }
+    return Promise.reject({ success: false, message: "Server Error" });
   }
 );
 

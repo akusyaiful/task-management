@@ -1,12 +1,16 @@
-import { AxiosError } from "axios";
 import { useState } from "react";
-import { registerService } from "../service/authService";
 import toast from "react-hot-toast";
+import { registerService } from "../service/authService";
 
 interface RegisterData {
   name: string;
   username: string;
   password: string;
+}
+
+interface ErrorResponse {
+  message: string;
+  success?: boolean;
 }
 
 export default function useRegister() {
@@ -28,11 +32,8 @@ export default function useRegister() {
       }
     } catch (error: unknown) {
       let message = "Server Error";
-
-      if (error instanceof AxiosError) {
-        message = error.response?.data?.message || message;
-      } else if (error instanceof Error) {
-        message = error.message;
+      if (typeof error === "object" && error !== null && "message" in error) {
+        message = (error as ErrorResponse).message;
       }
       toast.error(message);
       return null;
