@@ -1,12 +1,13 @@
-import { useEffect, useState } from "react";
-import TaskList from "../../components/tasks/TaskList";
-import useTasks from "../../hooks/useTasks";
-import { type Task, type TaskStatus } from "../../types/task";
 import { Plus } from "lucide-react";
-import Modal from "../../components/ui/Modal";
+import { useEffect, useState } from "react";
+import { Toaster } from "react-hot-toast";
+import { ClipLoader } from "react-spinners";
 import TaskForm from "../../components/forms/TaskForm";
 import TaskFilterSort from "../../components/tasks/TaskFilterSort";
-import { Toaster } from "react-hot-toast";
+import TaskList from "../../components/tasks/TaskList";
+import Modal from "../../components/ui/Modal";
+import useTasks from "../../hooks/useTasks";
+import { type Task, type TaskStatus } from "../../types/task";
 
 export default function TaskPage() {
   const {
@@ -62,6 +63,12 @@ export default function TaskPage() {
         onChangeStatus={setStatusFilter}
         onChangeSort={setSortOrder}
       />
+
+      {loading && (
+        <div className="flex justify-center items-center h-64">
+          <ClipLoader color="#155dfc" size={50} />
+        </div>
+      )}
 
       {!loading && !error && (
         <TaskList tasks={tasks} onEdit={openModal} onDelete={deleteTask} />
