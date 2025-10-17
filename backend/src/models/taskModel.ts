@@ -1,24 +1,13 @@
 import { ResultSetHeader, RowDataPacket } from "mysql2";
 import pool from "../db";
-
-export type DBTask = {
-  task_id: number;
-  user_id: number;
-  title: string;
-  description: string;
-  status: "To Do" | "In Progress" | "Done";
-  deadline: string;
-  created_at?: string;
-  created_by: string;
-  updated_at?: string;
-};
+import { DBTask, TaskStatus } from "../types/Task";
 
 export async function createTask(
   user_id: number,
   title: string,
   created_by: string,
   description?: string,
-  status: "To Do" | "In Progress" | "Done" = "To Do",
+  status: TaskStatus = "To Do",
   deadline?: string
 ): Promise<number | null> {
   try {

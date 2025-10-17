@@ -1,12 +1,6 @@
 import { ResultSetHeader, RowDataPacket } from "mysql2";
 import pool from "../db";
-
-export type DBUser = {
-  user_id: number;
-  name: string;
-  username: string;
-  password: string;
-};
+import { DBUser } from "../types/User";
 
 export async function createUser(
   name: string,
