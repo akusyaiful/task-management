@@ -14,11 +14,11 @@ export default function TaskFilterSort({
   onChangeSort,
 }: TaskFilterSortProps) {
   return (
-    <div className="flex flex-col sm:flex-row gap-4 mb-4 items-start sm:items-center flex-wrap">
-      <div className="flex flex-col sm:flex-row sm:items-center gap-2">
+    <div className="flex flex-col w-full sm:size-fit sm:flex-row gap-4 mb-4 items-start sm:items-center flex-wrap">
+      <div className="flex flex-col w-full sm:size-fit items-start sm:flex-row sm:items-center gap-2">
         <label className="mr-2 font-semibold">Filter by status:</label>
         <select
-          className="border rounded-lg p-1 min-w-[150px]"
+          className="border rounded-lg p-1 w-full sm:size-fit"
           value={status}
           onChange={(e) => onChangeStatus(e.target.value as TaskStatus | "All")}
         >
@@ -29,10 +29,10 @@ export default function TaskFilterSort({
         </select>
       </div>
 
-      <div className="flex flex-col sm:flex-row sm:items-center gap-2">
+      <div className="flex flex-col sm:flex-row w-full sm:size-fit items-start sm:items-center gap-2">
         <label className="mr-2 font-semibold">Sort by deadline:</label>
         <select
-          className="border rounded-lg p-1"
+          className="border rounded-lg p-1 w-full sm:size-fit"
           value={sort}
           onChange={(e) => onChangeSort(e.target.value as "asc" | "desc")}
         >

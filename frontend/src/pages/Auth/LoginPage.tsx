@@ -26,7 +26,7 @@ export default function LoginPage() {
       <Toaster position="top-center" reverseOrder={false} />
 
       <form
-        className="flex flex-col w-[70%] sm:w-[40%]"
+        className="flex flex-col w-[70%] sm:w-[20%]"
         onSubmit={handleSubmit}
       >
         <h1 className="text-4xl font-bold mb-4">Login</h1>
