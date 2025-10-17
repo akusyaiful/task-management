@@ -40,8 +40,6 @@ export async function getTaskByUser(
       sql += ` ORDER BY deadline ${
         sort.toUpperCase() === "ASC" ? "ASC" : "DESC"
       }`;
-    } else {
-      sql += " ORDER BY created_at DESC";
     }
 
     const [rows] = await pool.query<RowDataPacket[]>(sql, params);

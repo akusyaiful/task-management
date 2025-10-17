@@ -7,7 +7,5 @@ export interface DBTask {
   description: string;
   status: TaskStatus;
   deadline: string;
-  created_at?: string;
   created_by: string;
-  updated_at?: string;
 }
