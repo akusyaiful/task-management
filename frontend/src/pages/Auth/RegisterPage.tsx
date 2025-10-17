@@ -9,7 +9,6 @@ export default function RegisterPage() {
   const [name, setName] = useState("");
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
 
   const { register, loading } = useRegister();
@@ -49,17 +48,6 @@ export default function RegisterPage() {
           placeholder="Password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
-        >
-          <TogglePassword
-            show={showPassword}
-            onClick={() => setShowPassword(!showPassword)}
-          />
-        </Input>
-        <Input
-          type={showPassword ? "text" : "password"}
-          placeholder="Confirm password"
-          value={confirmPassword}
-          onChange={(e) => setConfirmPassword(e.target.value)}
         >
           <TogglePassword
             show={showPassword}
